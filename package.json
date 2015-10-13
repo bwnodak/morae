@@ -1,0 +1,31 @@
+{
+  "name": "morae",
+  "version": "1.0.0",
+  "description": "Find haikus in text",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonbeastie/morae.git"
+  },
+  "keywords": [
+    "text",
+    "haiku",
+    "syllables",
+    "poetry"
+  ],
+  "author": "Brian Nelson <yonbeastie@gmail.com> (http://yonbeastie.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yonbeastie/morae/issues"
+  },
+  "homepage": "https://github.com/yonbeastie/morae#readme",
+  "dependencies": {
+    "syllable": "^0.1.4"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  }
+}
