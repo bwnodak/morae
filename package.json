@@ -1,7 +1,7 @@
 {
   "name": "morae",
-  "version": "1.0.1",
-  "description": "Find haikus in text",
+  "version": "2.0.0",
+  "description": "Find haikus in English text",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
