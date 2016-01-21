@@ -48,16 +48,8 @@ describe('Syllable crawling', function() {
     assert.equal(morae.crawl(data, 6), 'the lazy dog');
   });
 
-  it('should throw an error if crawl window is not valid', function() {
-    var data = 'The quick brown fox jumps over the lazy dog';
-
-    assert.throw(morae.crawl(data, -1, -5), 'invalid crawl window'); // invalid begin/end points
-    assert.throw(morae.crawl(data, 'boom', 5), 'invalid crawl window'); // invalid begin point
-    assert.throw(morae.crawl(data, 10, 5), 'invalid crawl window'); // begin point exceeds syllables of string
-  });
-
   it('should return `null` if a crawl window was not found', function() {
-    assert.isNull(morae.crawl(data, 0, 6)); // 6th syllable is in the middle of a two-syllable word
+    assert.equal(morae.crawl(data, 0, 6), null); // 6th syllable is in the middle of a two-syllable word
   });
 });
 

@@ -5,8 +5,8 @@ module.exports = [{
   syllableCount: 11,
   crawl: {
     begin: 3,
-    end: 4,
-    result: 'fox jumps over the'
+    end: 7,
+    result: 'brown fox jumps over the'
   },
   haikus: []
 }, {
@@ -16,8 +16,8 @@ module.exports = [{
   syllableCount: 36,
   crawl: {
     begin: 9,
-    end: 15,
-    result: 'loch impressed all, including the French queen, before she heard that'
+    end: 19,
+    result: 'the loch impressed all, including the French queen'
   },
   haikus: []
 }, {
@@ -26,9 +26,9 @@ module.exports = [{
   whitespace: 'Are  \r\f\r those shy \r \n  \t Eurasian \n\r\f footwear, cowboy   \r chaps, \r\t\n\n or   jolly     earthmoving   \r\r\n headgear?',
   syllableCount: 19,
   crawl: {
-    begin: 6,
-    end: 11,
-    result: 'footwear, cowboy chaps, or jolly earthmoving'
+    begin: 7,
+    end: 12,
+    result: 'footwear, cowboy chaps, or'
   },
   haikus: []
 }];
