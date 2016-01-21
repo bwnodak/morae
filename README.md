@@ -17,7 +17,7 @@ of them will be total shit, but that's just how it goes.
     var morae = require('morae');
     var txt = 'Thick blanket of snow snuggling the flowerbeds with a winter wrap.';
 
-    console.log(morae.find(txt));
+    console.log(morae.extract(txt));
 
 Output:
 
@@ -27,33 +27,29 @@ Output:
       three: 'with a winter wrap.'
     }]
 
+Morae can also be used to crawl a block of text and return a "window" of syllables.
+For example, you might provide a block of text and wish to return syllables 6
+through 11 (inclusive). Keep in mind that the window must be valid and can't  
+divide words.
+
+    var morae = require('morae');
+    var txt = 'Thick blanket of snow snuggling the flowerbeds with a winter wrap.';
+
+    console.log(morae.crawl(txt, 6, 11)); // 'snuggling the flowerbeds'
+    console.log(morae.crawl(txt, 6, 9)); // null
+
+More simply, Morae can be used to count syllables in blocks of text.
+
+    console.log(morae.count('snuggling the flowerbeds')); // 6
+    console.log(morae.count('<h1>Chapter One</h1> <p>I was born in New Orleans.</p>'); // 10
+    console.log(morae.count('and   \r\n then \t\t the \t\n boat   \rsank'); // 5
+
 Tests
 -----
 
 Run tests with `npm test`.
 
+Acknowledgments
+---------------
 
-License
--------
-
-The MIT License (MIT)
-
-Copyright (c) 2015 Brian W. Nelson
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Inspired by my friend Seth Bicknell.
