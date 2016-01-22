@@ -17,16 +17,36 @@ module.exports = {
 
   /**
    * Find a window of syllables in a block of text
+   * Note: will return `null` if syllable window splits a word
    *
+   * @param {string} txt
+   * @param {number} begin - first syllable of the window
+   * @param {number|null} end - last syllable of the window
+   * @return {string|null}
    */
-  crawl(txt, offset, target) {
+  crawl(txt, begin, end) {
+    begin = begin || 0;
+    end = end || 0;
+
     // validate params
-    if (typeof offset !== 'number' || offset < 0) {
+    if (typeof begin !== 'number' || begin < 0) {
       throw new Error('invalid crawl window');
     }
-    if (typeof target !== 'number' || offset > target) {
+    if (typeof begin !== 'number' || begin >= end) {
       throw new Error('invalid crawl window');
     }
+
+    let words = splitText(removeWhitespace(removeHtml(txt)));
+    let beforeWindow = crawlSyllables(words, 0, begin);
+    let throughWindow = crawlSyllables(words, 0, end);
+
+    // return null if the window splits any words
+    if (!(beforeWindow && throughWindow)) { return null; }
+
+    // because we don't want the last word removed!
+    beforeWindow.pop();
+
+    return throughWindow.join(' ').replace(beforeWindow.join(' '), '').trim();;
   },
 
   /**
@@ -38,22 +58,22 @@ module.exports = {
   extract(txt) {
     let words = splitText(removeWhitespace(removeHtml(txt)));
     let haikus = [];
-    let line1, line2, line3;
-    let begin, end = words.length;
 
     words.forEach((word, idx) => {
+      let line1, line2, line3, begin;
+
       begin = idx;
-      line1 = crawlSyllables(words.slice(begin, end), SYLLABLES.LINE_ONE);
+      line1 = crawlSyllables(words, begin, SYLLABLES.LINE_ONE);
 
       if (!line1) { return; }
 
-      begin = idx + line1.length;
-      line2 = crawlSyllables(words.slice(begin, end), SYLLABLES.LINE_TWO);
+      begin += line1.length;
+      line2 = crawlSyllables(words, begin, SYLLABLES.LINE_TWO);
 
       if (!line2) { return; }
 
-      begin = idx + line1.length + line2.length;
-      line3 = crawlSyllables(words.slice(begin, end), SYLLABLES.LINE_THREE);
+      begin += line2.length;
+      line3 = crawlSyllables(words, begin, SYLLABLES.LINE_THREE);
 
       if (!line3) { return; }
 
@@ -75,7 +95,7 @@ module.exports = {
  * @return {string}
  */
 function removeHtml(txt) {
-  return txt.replace(/(<([^>]+)>)/ig, ' '); // remove tags
+  return txt.replace(/(<([^>]+)>)/ig, ''); // remove tags
 };
 
 /**
@@ -124,6 +144,8 @@ function getSyllables(txt) {
 function crawlSyllables(words, start, targetSyllables) {
   let syllables = 0;
   let crawledWords = [];
+
+  words = words.slice(start, words.length);
 
   words.some(word => {
     syllables += getSyllables(word);

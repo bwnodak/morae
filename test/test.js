@@ -41,15 +41,11 @@ describe('Syllable crawling', function() {
     assert.equal(morae.crawl(data[2].whitespace, data[2].crawl.begin, data[2].crawl.end), data[2].crawl.result);
   });
 
-  it('should return remainder of string if target syllable count is not included', function() {
+  it('should return `null` if a crawl window was not found', function() {
     var data = 'The quick brown fox jumps over the lazy dog';
 
-    assert.equal(morae.crawl(data, 3), 'fox jumps over the lazy dog');
-    assert.equal(morae.crawl(data, 6), 'the lazy dog');
-  });
-
-  it('should return `null` if a crawl window was not found', function() {
     assert.equal(morae.crawl(data, 0, 6), null); // 6th syllable is in the middle of a two-syllable word
+    assert.equal(morae.crawl(data, 7, 8), null); // 7th syllable is in the middle of a two-syllable word
   });
 });
 
