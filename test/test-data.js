@@ -17,7 +17,7 @@ module.exports = [{
   crawl: {
     begin: 9,
     end: 19,
-    result: 'the loch impressed all, including the French queen'
+    result: 'the loch impressed all, including the French queen,'
   },
   haikus: [{
      "1": "The beige hue on the",
