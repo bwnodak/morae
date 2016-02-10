@@ -19,7 +19,35 @@ module.exports = [{
     end: 19,
     result: 'the loch impressed all, including the French queen'
   },
-  haikus: []
+  haikus: [{
+     "1": "The beige hue on the",
+     "2": "waters of the loch impressed",
+     "3": "all, including the"
+    }, {
+     "1": "the waters of the",
+     "2": "loch impressed all, including",
+     "3": "the French queen, before"
+    }, {
+     "1": "waters of the loch",
+     "2": "impressed all, including the",
+     "3": "French queen, before she"
+    }, {
+     "1": "of the loch impressed",
+     "2": "all, including the French queen,",
+     "3": "before she heard that"
+    }, {
+     "1": "all, including the",
+     "2": "French queen, before she heard that",
+     "3": "symphony again,"
+    }, {
+     "1": "French queen, before she",
+     "2": "heard that symphony again,",
+     "3": "just as young Arthur"
+    }, {
+     "1": "before she heard that",
+     "2": "symphony again, just as",
+     "3": "young Arthur wanted."
+    }]
 }, {
   normal: 'Are those shy Eurasian footwear, cowboy chaps, or jolly earthmoving headgear?',
   html: '<h3 id="sample-id">Are</h3> <div>those shy Eurasian footwear</div>, <form method="post" action="./sample.html">cowboy chaps</form>, or jolly earthmoving headgear?',
