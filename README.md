@@ -1,7 +1,7 @@
 Morae
-==================
+=====
 
-Provides a way of finding haikus in blocks of text.
+A tool for extracting haikus from English text.
 
 Installation
 ------------
@@ -11,13 +11,24 @@ Installation
 Usage
 -----
 
+Because Morae utilizes [The CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict "CMU Pronouncing Dictionary"), it is loaded asynchronously and provides availability to an instance
+of the class in a callback.
+
+    var Morae = require('morae');
+
+    Morae(m => {
+      // 'm' is the instance
+    });
+
 Provide a string of text and get an array of haikus back. Bear in mind that most
 of them will be total shit, but that's just how it goes.
 
-    var morae = require('morae');
+    var Morae = require('morae');
     var txt = 'Thick blanket of snow snuggling the flowerbeds with a winter wrap.';
 
-    console.log(morae.find(txt));
+    Morae(m => {
+      console.log(m.extract(txt));
+    });
 
 Output:
 
@@ -27,33 +38,20 @@ Output:
       three: 'with a winter wrap.'
     }]
 
+More simply, Morae can be used to count syllables in blocks of text.
+
+    Morae(m => {
+      console.log(m.count('snuggling the flowerbeds')); // 6
+      console.log(m.count('<h1>Chapter One</h1> <p>I was born in New Orleans.</p>'); // 10
+      console.log(m.count('and   \r\n then \t\t the \t\n boat   \rsank'); // 5
+    });
+
 Tests
 -----
 
 Run tests with `npm test`.
 
+Acknowledgments
+---------------
 
-License
--------
-
-The MIT License (MIT)
-
-Copyright (c) 2015 Brian W. Nelson
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Inspired by my friend Seth Bicknell.
